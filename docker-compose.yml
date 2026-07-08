@@ -1,0 +1,26 @@
+# Optional: spin up a real Postgres instance to run sql/schema.sql against,
+# instead of the local SQLite demo used by scripts/load_and_transform.py.
+#
+# Usage:
+#   docker compose up -d
+#   psql postgresql://foodtruck:foodtruck@localhost:5432/foodtruck -f sql/schema.sql
+#
+# To point the Python pipeline at Postgres instead of SQLite, swap the
+# sqlite3 connection in scripts/load_and_transform.py for psycopg2 using
+# the same connection string below.
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: foodtruck-postgres
+    environment:
+      POSTGRES_USER: foodtruck
+      POSTGRES_PASSWORD: foodtruck
+      POSTGRES_DB: foodtruck
+    ports:
+      - "5432:5432"
+    volumes:
+      - foodtruck_pgdata:/var/lib/postgresql/data
+
+volumes:
+  foodtruck_pgdata:
