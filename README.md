@@ -9,17 +9,16 @@ Originally a database design project for a business analytics class (ER model
 ** [See the analysis notebook](notebook/analysis.ipynb)** for a full walkthrough
 with charts and results.
 
-## Quick start
+## Why this project
 
-```bash
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+My goal for this project was to convert my class deliverable into something that behaves like a small production data pipeline that is both self-running and self-checking. It generates its own data, loads it, builds SQL views to answer the business questions, and checks its own output for errors. 
 
-python3 scripts/run_pipeline.py
-```
+## Stack
 
-That command generates the data, loads it into `foodtruck.db`, builds the
-analytics views, and validates the result.
+- **Python + Faker** — synthetic data generation
+- **Python (pandas, matplotlib)** — loading and charting layer only
+- **SQLite** — storage
+- **SQL views** — the transform/analytics layer
 
 ## Repo structure
 
@@ -37,9 +36,26 @@ analytics views, and validates the result.
 └── docker-compose.yml          optional: run the schema against real Postgres
 ```
 
+## Running it
+
+```bash
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+
+python3 scripts/run_pipeline.py
+```
+
+That command generates the data, loads it into `foodtruck.db`, builds the
+analytics views, and validates the result.
+
 ## Optional: run against Postgres instead of SQLite
 
 ```bash
 docker compose up -d
 psql postgresql://foodtruck:foodtruck@localhost:5432/foodtruck -f sql/schema.sql
 ```
+
+## Original version
+
+The original version of this project (built in a group for a
+business analytics course) is included for reference: [`BUS_315 Final Project.pdf`](BUS 315 Final Project.pdf).
