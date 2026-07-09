@@ -119,7 +119,6 @@ reference — the views above are the automated, reusable version of that same a
 - Replace CSV intermediate files with a proper staging schema + `dbt` models
   (staging → intermediate → marts)
 - Swap SQLite for the included Postgres service permanently
-- Add data quality checks (e.g. Great Expectations) on the load step
 - Containerize the whole pipeline
 
 ## Background
