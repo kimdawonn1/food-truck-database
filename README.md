@@ -1,12 +1,33 @@
 # Food Truck Data Pipeline
 
-A small end-to-end data pipeline for a fictional multi-location food truck business:
-synthetic data generation → relational warehouse load → analytical transform layer.
+A small end-to-end data pipeline for a fictional multi-location food truck business.
 
-This started as a database design project (ER model + hand-written SQL queries) for a
-business analytics course, and was rebuilt here as an automated, version-controlled
-pipeline to demonstrate core data engineering fundamentals: schema design, referential
-integrity, scripted ETL, and analytics-ready views.
+This started as a database design project for a business analytics class. I built the ER model and wrote the SQL queries by hand. I rebuilt it here with a proper schema, seed scripts, and Docker setup so it's actually runnable instead of just screenshots in a report.
+
+
+## Repo Structure
+```
+├── data/
+│   ├── customer.csv           Customer records
+│   ├── employee.csv           Employee records
+│   ├── inventory.csv          Inventory records
+│   ├── menu_item.csv          Menu item records
+│   ├── order.csv              Order records
+│   ├── order_has_menu_item.csv  Order line items (associative table)
+│   └── truck.csv              Truck records
+├── sql/
+│   └── schema.sql             Table definitions, keys, relationships
+├── scripts/
+│   ├── generate_data.py       Builds seed data
+│   ├── load_and_transform.py  Loads CSVs into the database
+│   ├── data_quality_checks.py Validates row counts, foreign keys, nulls
+│   └── run_pipeline.py        Runs the full pipeline end to end
+├── docs/
+│   └── original_queries.sql   The 10 business-question queries
+├── docker-compose.yml         Spins up the database for local development
+├── requirements.txt           Python dependencies
+└── README.md
+```
 
 ## Architecture
 
@@ -28,6 +49,8 @@ independently for development/debugging.
 
 ## Data model
 
+<img width="653" height="491" alt="Screenshot 2026-07-08 at 9 40 27 PM" src="https://github.com/user-attachments/assets/bff60a2f-cf9a-427b-9a7a-bc9c50fbb45a" />
+
 7 tables, matching `sql/schema.sql`:
 
 - **truck** — 4 locations (Lex Mex, Mac Mart, Oink-Moo BBQ, Mr. H's Donuts)
@@ -40,11 +63,11 @@ independently for development/debugging.
 - **inventory** — tracks individual stocked items with purchase/expiration dates,
   linked to both `truck` and `menu_item`
 
-## Tech stack
+## Stack
 
-- **Python 3 + Faker** — deterministic, seeded synthetic data generation (no more
-  manually counting rows out of a chatbot)
-- **SQLite** — local warehouse for the runnable demo (zero external dependencies)
+- **Python 3 + Faker** — Seeded synthetic data generation (no more
+  manually counting rows out of a chatbot as I did before)
+- **SQLite** — local warehouse for the runnable demo
 - **PostgreSQL (via Docker Compose)** — production-flavored DDL in `sql/schema.sql`;
   optional `docker-compose.yml` included to run the same schema against real Postgres
 - **SQL views** — a lightweight transform/marts layer answering business questions
@@ -96,7 +119,6 @@ reference — the views above are the automated, reusable version of that same a
 - Replace CSV intermediate files with a proper staging schema + `dbt` models
   (staging → intermediate → marts)
 - Swap SQLite for the included Postgres service permanently
-- Add data quality checks (e.g. Great Expectations) on the load step
 - Containerize the whole pipeline
 
 ## Background
