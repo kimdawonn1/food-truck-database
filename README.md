@@ -6,8 +6,8 @@ generate synthetic data → load it into a database → validate it → analyze 
 Originally a database design project for a business analytics class (ER model
 + hand-written SQL queries). Rebuilt as a scripted, reproducible pipeline.
 
-**→ [See the analysis notebook](notebook/analysis.ipynb)** for a full walkthrough
-with charts and results — start there.
+** [See the analysis notebook](notebook/analysis.ipynb)** for a full walkthrough
+with charts and results.
 
 ## Quick start
 
