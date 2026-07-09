@@ -58,4 +58,4 @@ psql postgresql://foodtruck:foodtruck@localhost:5432/foodtruck -f sql/schema.sql
 ## Original version
 
 The original version of this project (built in a group for a
-business analytics course) is included for reference: [`BUS_315 Final Project.pdf`](BUS 315 Final Project.pdf).
+business analytics course) is included for reference: [BUS 315 Final Project.pdf](https://github.com/user-attachments/files/29831200/BUS.315.Final.Project.pdf)
