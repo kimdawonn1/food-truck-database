@@ -49,6 +49,8 @@ independently for development/debugging.
 
 ## Data model
 
+<img width="653" height="491" alt="Screenshot 2026-07-08 at 9 40 27 PM" src="https://github.com/user-attachments/assets/bff60a2f-cf9a-427b-9a7a-bc9c50fbb45a" />
+
 7 tables, matching `sql/schema.sql`:
 
 - **truck** — 4 locations (Lex Mex, Mac Mart, Oink-Moo BBQ, Mr. H's Donuts)
@@ -61,11 +63,11 @@ independently for development/debugging.
 - **inventory** — tracks individual stocked items with purchase/expiration dates,
   linked to both `truck` and `menu_item`
 
-## Tech stack
+## Stack
 
-- **Python 3 + Faker** — deterministic, seeded synthetic data generation (no more
-  manually counting rows out of a chatbot)
-- **SQLite** — local warehouse for the runnable demo (zero external dependencies)
+- **Python 3 + Faker** — Seeded synthetic data generation (no more
+  manually counting rows out of a chatbot as I did before)
+- **SQLite** — local warehouse for the runnable demo
 - **PostgreSQL (via Docker Compose)** — production-flavored DDL in `sql/schema.sql`;
   optional `docker-compose.yml` included to run the same schema against real Postgres
 - **SQL views** — a lightweight transform/marts layer answering business questions
