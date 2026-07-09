@@ -1,12 +1,33 @@
 # Food Truck Data Pipeline
 
-A small end-to-end data pipeline for a fictional multi-location food truck business:
-synthetic data generation → relational warehouse load → analytical transform layer.
+A small end-to-end data pipeline for a fictional multi-location food truck business.
 
-This started as a database design project (ER model + hand-written SQL queries) for a
-business analytics course, and was rebuilt here as an automated, version-controlled
-pipeline to demonstrate core data engineering fundamentals: schema design, referential
-integrity, scripted ETL, and analytics-ready views.
+This started as a database design project for a business analytics class. I built the ER model and wrote the SQL queries by hand. I rebuilt it here with a proper schema, seed scripts, and Docker setup so it's actually runnable instead of just screenshots in a report.
+
+
+## Repo Structure
+```
+├── data/
+│   ├── customer.csv           Customer records
+│   ├── employee.csv           Employee records
+│   ├── inventory.csv          Inventory records
+│   ├── menu_item.csv          Menu item records
+│   ├── order.csv              Order records
+│   ├── order_has_menu_item.csv  Order line items (associative table)
+│   └── truck.csv              Truck records
+├── sql/
+│   └── schema.sql             Table definitions, keys, relationships
+├── scripts/
+│   ├── generate_data.py       Builds seed data
+│   ├── load_and_transform.py  Loads CSVs into the database
+│   ├── data_quality_checks.py Validates row counts, foreign keys, nulls
+│   └── run_pipeline.py        Runs the full pipeline end to end
+├── docs/
+│   └── original_queries.sql   The 10 business-question queries
+├── docker-compose.yml         Spins up the database for local development
+├── requirements.txt           Python dependencies
+└── README.md
+```
 
 ## Architecture
 
