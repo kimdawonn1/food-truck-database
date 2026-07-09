@@ -1,1 +1,4 @@
 Faker==26.0.0
+pandas==2.2.2
+matplotlib==3.9.0
+jupyter==1.0.0
